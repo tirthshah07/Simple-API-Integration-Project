@@ -1,0 +1,78 @@
+<!--Navbar Start-->
+<nav class="navbar navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand">
+      Simple Web Application
+    </a>
+  </div>
+</nav>
+<!--Navbar End-->
+
+<!--Main Body Part Starts-->
+<div class="section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card mt-3">
+          <div class="card-header">
+            <h2>List From API</h2>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Filter Table</mat-label>
+                <input matInput placeholder="Title Value" (keyup)="applyFilter($event)" #input>
+              </mat-form-field>
+
+              <table class="table table-bordered table-striped table-sm text-center" [dataSource]="dataSources"
+                mat-table matSort matSortActive matSortStart="asc">
+
+                <ng-container matColumnDef="userId">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by userId">
+                    <div class="tableheadings">User Id</div>
+
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tempstyle">{{element.userId}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id">
+                    <div class="tableheadings">Id</div>
+
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tempstyle">{{element.id}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="title">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title">
+                    <div class="tableheadings">Title</div>
+
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tempstyle">{{element.title}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="body">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by body">
+                    <div class="tableheadings">Body</div>
+
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="tempstyle">{{element.body}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayColumn"></tr>
+                <tr mat-row *matRowDef="let row; columns:displayColumn"></tr>
+
+              </table>
+
+              <mat-paginator #paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+                aria-label="Select page for Userdata">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Main Body Part Ends-->
+<router-outlet></router-outlet>
